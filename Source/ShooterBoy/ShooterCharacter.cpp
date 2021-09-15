@@ -62,10 +62,10 @@ void AShooterCharacter::MoveRight(float Value)
 void AShooterCharacter::TurnAtRate(float Rate)
 {
 	// movement like shaking head calculate delta for this frame
-	AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds()); // deg/sec * sec/frame 
+	AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds()); // deg/sec * sec/frame Yaw
 }
 
-void AShooterCharacter::LookUpAtRate(float Rate)
+void AShooterCharacter::LookUpAtRate(float Rate) // pitch
 {
 	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds()); // deg/sec * sec/frame 
 }
@@ -83,8 +83,10 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 	check(PlayerInputComponent);
 
+	// add movement for move forward and right
 	PlayerInputComponent->BindAxis("MoveForward", this, &AShooterCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AShooterCharacter::MoveRight);
+	// add movment for yaw and pitch rates
 	PlayerInputComponent->BindAxis("TurnRate", this, &AShooterCharacter::TurnAtRate);
 	PlayerInputComponent->BindAxis("LookUpAtRate", this, &AShooterCharacter::LookUpAtRate);
 	// this adds turn movement with mouse
