@@ -31,6 +31,9 @@ protected:
 	// Called input to look up/down of given rate i.e. 1.0 means 100%
 	void LookUpAtRate(float Rate);
 
+	// Called when Fire Button is pressed 
+	void FireWeapon();
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -54,6 +57,18 @@ private:
 	// base look up and down rate in degrees per second
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	float BaseLookUpRate;
+
+	// Gunshot Sound Cue 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat", meta = (AllowPrivateAccess = "true"))
+	class USoundCue* FireSound;
+
+	// Flash spawned at BarrelSocket 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat", meta = (AllowPrivateAccess = "true"))
+	class UParticleSystem* MuzzleFlash;
+
+	// Montage for firing weapon 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat", meta = (AllowPrivateAccess = "true"))
+	class UAnimMontage* HipFireMontage;
 
 public:
 	// Returns CameraBoom subobject // this is a getter
